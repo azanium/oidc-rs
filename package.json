@@ -1,5 +1,5 @@
 {
-  "name": "@trust/oidc-rs",
+  "name": "@ainasoft/oidc-rs",
   "version": "0.3.1",
   "description": "OpenID Connect Resource Server Authentication for Node.js",
   "main": "src/index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anvilresearch/oidc-rs.git"
+    "url": "git+https://github.com/azanium/oidc-rs.git"
   },
   "author": "",
   "contributors": [
@@ -23,13 +23,17 @@
     {
       "name": "Dmitri Zagidulin",
       "url": "https://github.com/dmitrizagidulin"
+    },
+    {
+      "name": "Suhendra Ahmad",
+      "url": "https://github.com/azanium"
     }
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anvilresearch/oidc-rs/issues"
+    "url": "https://github.com/azanium/oidc-rs/issues"
   },
-  "homepage": "https://github.com/anvilresearch/oidc-rs#readme",
+  "homepage": "https://github.com/azanium/oidc-rs#readme",
   "dependencies": {
     "@trust/jose": "^0.1.7",
     "node-fetch": "^1.7.1"
