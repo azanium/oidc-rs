@@ -469,7 +469,6 @@ class AuthenticatedRequest {
       });
     });
 
-    console.log('====> allowed', allowed);
     if (allowed) {
       return
     } else {
