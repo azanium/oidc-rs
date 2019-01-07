@@ -2,6 +2,7 @@
  * Dependencies
  */
 const {JWT} = require('@trust/jose')
+const ARN = require('node-arn');
 const Credential = require('./Credential')
 
 /**
@@ -338,6 +339,9 @@ class AuthenticatedRequest {
 
     request.allowSubject(request)
 
+    request.allowPermissions(request)
+
+
     return request
   }
 
@@ -423,6 +427,56 @@ class AuthenticatedRequest {
         realm,
         error: 'access_denied',
         error_description: 'Issuer is not on the allowed list'
+      })
+    }
+  }
+
+  allowPermissions (request) {
+    const validatePermission = (sourceArn, targetArn) => {
+      try {
+          const source = ARN.parse(sourceArn);
+          const target = ARN.parse(targetArn);
+          return source.match(target);
+        } catch (error) {
+          return false
+        }
+    }
+
+    let { options, credential: { claims: { perms } } } = request;
+    let { realm, allow: { permissions: allowPerms } } = options;
+
+    if (!allowPerms) {
+      return
+    }
+
+    if (typeof allowPerms === 'function') {
+      if (allowPerms(perms)) {
+        return
+      } else {
+        return request.forbidden({
+          realm,
+          error: 'access_denied',
+          error_description: 'Permissions denied'
+        })
+      }
+    }
+    let allowed = false;
+    perms.forEach((sourcePerm) => {
+      allowPerms.forEach((targetPerm) => {
+        if (!allowed && validatePermission(sourcePerm, targetPerm)) {
+          allowed = true;
+        }
+      });
+    });
+
+    console.log('====> allowed', allowed);
+    if (allowed) {
+      return
+    } else {
+      return request.forbidden({
+        realm,
+        error: 'access_denied',
+        error_description: 'Permissions denied'
       })
     }
   }
