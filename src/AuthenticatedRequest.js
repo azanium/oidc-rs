@@ -461,13 +461,15 @@ class AuthenticatedRequest {
       }
     }
     let allowed = false;
-    perms.forEach((sourcePerm) => {
-      allowPerms.forEach((targetPerm) => {
-        if (!allowed && validatePermission(sourcePerm, targetPerm)) {
-          allowed = true;
-        }
+    if (perms && perms.length > 0) {
+      perms.forEach((sourcePerm) => {
+        allowPerms.forEach((targetPerm) => {
+          if (!allowed && validatePermission(sourcePerm, targetPerm)) {
+            allowed = true;
+          }
+        });
       });
-    });
+    }
 
     if (allowed) {
       return
