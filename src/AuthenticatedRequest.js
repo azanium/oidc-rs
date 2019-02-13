@@ -63,7 +63,7 @@ class AuthenticatedRequest {
    */
   static authenticate (rs, req, res, next, options) {
     let request = new AuthenticatedRequest(rs, req, res, next, options)
-
+    
     // These methods on the request object are invoked in the promise chain
     // as callbacks. Each method in the chain takes a request instance and
     // assuming no error conditions are encountered, returns it, or returns

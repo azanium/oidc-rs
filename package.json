@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/azanium/oidc-rs#readme",
   "dependencies": {
-    "@trust/jose": "^0.4.0",
+    "@trust/jose": "^0.1.7",
     "node-arn": "^1.1.1",
     "node-fetch": "^1.7.1"
   },
